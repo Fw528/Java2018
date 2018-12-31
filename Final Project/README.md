@@ -5,7 +5,7 @@
     7个葫芦娃共享葫芦娃类，爷爷单独有个class,因为最初想把爷爷做成没有攻击力的旁观者，即当葫芦娃死亡爷爷自动死亡，但是发现这样并咩有意义。
     
 ### 界面说明
-![Image text]（Java2018/Final Project/src/main/resources/readme/开始界面.png）
+![Image text]（https://raw.githubusercontent.com/Fw528/Java2018/master/Final%20Project/src/main/resources/readme/%E5%BC%80%E5%A7%8B%E7%95%8C%E9%9D%A2.png）
     主界面保留了存档的按钮，但是因为回放没有debug完，所以也只有按钮，没有实际效果。
     进入游戏以后能够选择葫芦娃这边的阵容，分别是长蛇，鹤翼，衡轭，方门四种。
     其中鹤翼可能不是原本理解中的V形状，因为鹤翼一长一短的话不符合我的审美，所以爷爷辈放在正中间保护。
