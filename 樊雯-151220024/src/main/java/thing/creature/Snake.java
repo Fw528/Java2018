@@ -16,24 +16,12 @@ public class Snake extends Monster {
 		image = new Image("SHE.png");
 		name = "蛇精";
 		
-		fullBlood = 40;
-		Force = 10;
+		fullBlood = 40; //超血量
+		Force = 8;
 		Blood = fullBlood;
 		Speed = 1500;
 	}
-	/*
-	public void cure() {
-		ArrayList<Monster> monsters = field.getRunningMonsters();
-		if (monsters.isEmpty()) {
-			return;
-		}
-		state = CreatureState.CURE;
-		for (int i = 0; i < monsters.size(); i++) {
-			monsters.get(i).getCured(CURE_ADDHP);
-		}
-		System.out.println("蛇精完成了一次治疗");
-	}
-	*/
+
 	@Override
 	public void run() {
 		System.out.println(getName()+"线程开始");
@@ -44,9 +32,9 @@ public class Snake extends Monster {
 					// 前方有敌人，触发战斗事件
 					if (field.existGoodCreature(position.getX(), position.getY()-1)) {
 						Creature good = field.getCreature(position.getX(), position.getY()-1);
-						/*if (good.getState() == CreatureState.RUNNING || good.getState() == CreatureState.CURE) {
+						if (good.getState() == CreatureState.RUNNING) {
 							field.createBattleEvent(good, this);
-						} else */{
+						} else {
 							setCreatureOnNextPosition(getNextPosition());
 							step++;
 						}

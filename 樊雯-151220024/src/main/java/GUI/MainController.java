@@ -47,12 +47,12 @@ public class MainController implements Initializable {
 	
 	private HuluWorld huluWorld;
 
+	ReplayPainter replayPainter;
 	String form;
 
 	public MainController() {
 		//默认以长蛇初始化
 		form ="Changshe";
-		//因为有bug
 	}
 	
 	public void initialize(URL url, ResourceBundle rb) {
@@ -96,6 +96,9 @@ public class MainController implements Initializable {
 	@FXML
 	private void handleRestartGame() {
 		System.out.println("按下了重新开始");
+		if (replayPainter != null) {
+			replayPainter.kill();
+		}
 
 		startBattleBtn.setDisable(false);
 		replayGameBtn.setDisable(false);
@@ -145,11 +148,36 @@ public class MainController implements Initializable {
 	
 	public void killAllThread() {
 		System.out.println("killAllThread");
+
+		if (replayPainter != null) {
+			replayPainter.kill();
+		}
 		huluWorld.killAllTheThread();
 	}
 	
 	@FXML
 	private void handleSaveLog() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("保存记录");
+		/**
+		 * 打开文件夹展示保存地点
+		 */
+		FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("游戏记录文件", "*.record");
+		fileChooser.getExtensionFilters().add(fileExtensions);
+
+		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		System.out.println(currentPath);
+		fileChooser.setInitialDirectory(new File(currentPath));
+		File file = fileChooser.showSaveDialog(null);
+		if (file != null) {
+			try {
+				huluWorld.saveGameLog(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println("保存成功");
+			handleRestartGame();
+		}
 
 	}
 	

@@ -33,7 +33,14 @@ public class HuluWorld implements Runnable,Constants{
 	ArrayList<Monster> monsters = new ArrayList<>();
 	
 	int battleResult = 0; // 战斗结果，1为胜利，0为失败
+	
+	private int goodsStartRow;
+	private int goodsStartColumn;
 
+	private int badsStartRow;
+	private int badsStartColumn;
+	private int badsCrtFmt = 2;
+	
 	private Canvas battleFieldCanvas;
 	
 	private Button saveLogBtn;
@@ -44,6 +51,7 @@ public class HuluWorld implements Runnable,Constants{
 	private ExecutorService creatureThreadPool = Executors.newCachedThreadPool(); // 所有生物线程
 	private ExecutorService guiThread = Executors.newSingleThreadExecutor(); // GUI绘制是一个线程
 	private ExecutorService battleEventThreadPool = Executors.newCachedThreadPool(); // 所有战斗事件
+	private ExecutorService skillThingThreadPool = Executors.newCachedThreadPool(); // 所有释放的技能
 
 
 	private String formname;
@@ -78,7 +86,7 @@ public class HuluWorld implements Runnable,Constants{
 		guiPainter.drawBattleField();
 		
 		Thing.setField(battleField);
-		battleField.setEventThreadPool(battleEventThreadPool);
+		battleField.setEventThreadPool(battleEventThreadPool, skillThingThreadPool);
 	}
 
 	public void setFormname(String name){formname = name;}
@@ -144,6 +152,7 @@ public class HuluWorld implements Runnable,Constants{
 		//battleField.kill();
 		guiPainter.kill();
 		battleEventThreadPool.shutdown();
+		skillThingThreadPool.shutdown();
 
 	}
 	

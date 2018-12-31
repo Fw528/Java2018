@@ -3,6 +3,7 @@ package space;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
+import event.BattleEvent;
 import loginfo.CreatureInfo;
 import loginfo.FrameInfo;
 import thing.creature.Creature;
@@ -17,20 +18,35 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class BattleField implements Constants{
-	private Creature[][] battlePlace = new Creature[Constants.ROW][Constants.COLUMN];
+	private Coord[][] coords;
+	private int row;
+	private int column;
 
 	
 	private ExecutorService battleEventThreadPool;
+	private ExecutorService skillThingThreadPool;
 
-	public BattleField() {
-
-		battlePlace = new Creature[COLUMN][ROW]
+	/*
+	private Image cureBrosImage = new Image("cureBrothers.gif");
+	private Image cureMonsImage = new Image("cureMonsters.gif");
+	*/
+	public BattleField(int r, int c) {
+		row = r;
+		column = c;
+		coords = new Coord[r][c];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
-				battlePlace[i][j] = new Creature() ;
+				coords[i][j] = new Coord();
 			}
 		}
 		
+	}
+	
+	public int getRow() { return row; }
+	public int getColumn() { return column; }
+	
+	public int getWidth() {
+		return COORDWIDTH*column;
 	}
 	
 	public boolean setCreatrue(Creature creature, int x, int y) {
@@ -149,9 +165,42 @@ public class BattleField implements Constants{
 		return coords[x][y].getCreatrue();
 	}
 	
-	public void setEventThreadPool(ExecutorService battleEventThreadPool) {
+	public void setEventThreadPool(ExecutorService battleEventThreadPool, ExecutorService skillThingThreadPool) {
 		this.battleEventThreadPool = battleEventThreadPool;
+		this.skillThingThreadPool = skillThingThreadPool;
 	}
 	
+	public void createBattleEvent(Creature cala, Creature mons) {
+		battleEventThreadPool.execute(new BattleEvent(cala, mons));
+	}
 
+	public ArrayList<Huluwa> getRunningBrothers() {
+		ArrayList<Huluwa> brothers = new ArrayList<>();
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				if (coords[i][j].existCreature()) {
+					Creature creature = coords[i][j].getCreatrue();
+					if (creature instanceof Huluwa && creature.getState() == CreatureState.RUNNING) {
+						brothers.add((Huluwa) creature);
+					}
+				}
+			}
+		}
+		return brothers;
+	}
+	
+	public ArrayList<Monster> getRunningMonsters() {
+		ArrayList<Monster> monsters = new ArrayList<>();
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				if (coords[i][j].existCreature()) {
+					Creature creature = coords[i][j].getCreatrue();
+					if (creature instanceof Monster && creature.getState() == CreatureState.RUNNING) {
+						monsters.add((Monster) creature);
+					}
+				}
+			}
+		}
+		return monsters;
+	}
 }

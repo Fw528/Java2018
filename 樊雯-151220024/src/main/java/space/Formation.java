@@ -25,7 +25,7 @@ public class Formation {
             list[1] = new Position(4,3);
             list[2] = new Position(6,3);
             list[3] = new Position(3,2);
-            list[4] = new Position(7,5);
+            list[4] = new Position(7,2);
             list[5] = new Position(2,1);
             list[6] = new Position(8,1);
             list[7] = new Position(5,1);

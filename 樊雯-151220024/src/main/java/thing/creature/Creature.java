@@ -8,7 +8,7 @@ import thing.Thing;
 
 import javafx.scene.image.Image;
 
-public class Creature extends Thing implements Constants{
+public abstract class Creature extends Thing implements Runnable, Constants{
 	
 	private static final Image deadImage = new Image("gost.png");
 
@@ -39,9 +39,7 @@ public class Creature extends Thing implements Constants{
 	/**
 	 * 血条百分比 但是显示貌似有点点问题
 	 */
-	@Override
-	public void run(){
-	}
+
 
 	public void setPosition(int row, int column) {
 		position.setX(row);
@@ -64,19 +62,24 @@ public class Creature extends Thing implements Constants{
 	protected Position getNextPosition() {
 		Random random = new Random();
 		Position nextPos;
-		int x = position.getX();
-		if(x< (ROW/5)) x = x+1;
-		else if(4*x > 3*ROW) x = x-1;
-		else if(2*x>(ROW/3)) x = x-random.nextInt(2); //1/2的几率原地或者左
-		else if(x<(ROW/3))	x = x+random.nextInt(2); //1/2的几率原地或者→
-		else x = x+random.nextInt(3)-1;  //几率均等
+		int x = position.getX()+random.nextInt(3)-1;
+		int y = position.getY()+random.nextInt(3)-1;
 
 		/**
-		 * 使用key某个方向的可能性改变
+		 * 使用key某个方向的可能性改变 失败了
 		 */
+		if(y<= 1 ) y = y+1;
+		else if(y > COLUMN-2) y = y-1;
+		else if(y>10) y = y-random.nextInt(2); //1/2的几率原地或者左
+		else if(y<4) y = y+random.nextInt(2); //1/2的几率原地或者→
+		else y = y+random.nextInt(3)-1;
 
-		//x
-		int y = position.getY()+random.nextInt(3)-1;
+		if(x<=1) x+= 1;
+		else if(x == ROW-1) x-=1;
+		else if(x>9) x = x-random.nextInt(2); //1/2的几率原地或者左
+		else if(y<4) x = y+random.nextInt(2); //1/2的几率原地或者→
+		else y = y+random.nextInt(3)-1;
+
 		if(x>=ROW) x = ROW-1;
 		if(x<= 0) x = 0;
 		if (y<= 0 ) y = 0;

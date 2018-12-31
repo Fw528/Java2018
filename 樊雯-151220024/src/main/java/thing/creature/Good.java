@@ -21,9 +21,9 @@ public abstract class Good extends Creature implements Runnable {
 					// 前方有妖精，触发战斗事件
 					if (field.existBadCreature(position.getX(), position.getY()+1)) {
 						Creature monster = field.getCreature(position.getX(), position.getY()+1);
-						/*if (monster.getState() == CreatureState.RUNNING || monster.getState() == CreatureState.CURE) {
+						if(monster.getState() == CreatureState.RUNNING ) {
 							field.createBattleEvent(this, monster);
-						} else*/ {
+						} else {
 							setCreatureOnNextPosition(getNextPosition());
 							step++;
 						}

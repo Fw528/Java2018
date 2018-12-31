@@ -18,7 +18,7 @@ public class Monsterlist implements Constants{
         Xiezi.setImage(image);
         Xiezi.setName("蝎子");
         Xiezi.setBlood(10);
-        Xiezi.setForce(10);  //高攻击高血量选手
+        Xiezi.setForce(20);  //高攻击高血量选手
         Xiezi.setSpeed(1000);
 
         MonsterCollection.add(SHE);
@@ -28,8 +28,8 @@ public class Monsterlist implements Constants{
         for (int i = 0; i < LouloNumber; i++) {
             String t = i + "";
             Loulo[i].setName("喽啰" + t);
-            Loulo[i].setForce(4);
-            Loulo[i].setBlood(6);
+            Loulo[i].setForce(8);
+            Loulo[i].setBlood(18);
             Loulo[i].setImage(image);
             Loulo[i].setSpeed(1000);
             MonsterCollection.add(Loulo[i]);

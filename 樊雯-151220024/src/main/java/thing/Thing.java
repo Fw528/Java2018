@@ -4,9 +4,8 @@ import space.BattleField;
 
 import javafx.scene.image.Image;
 
-public abstract class Thing implements Runnable{
+public abstract class Thing {
 	public Image image;
-
 
 	private String ImageName;
 	
