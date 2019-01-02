@@ -3,7 +3,6 @@ package space;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 
-import event.BattleEvent;
 import loginfo.CreatureInfo;
 import loginfo.FrameInfo;
 import thing.creature.Creature;

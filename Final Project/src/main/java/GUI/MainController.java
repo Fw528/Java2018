@@ -47,7 +47,6 @@ public class MainController implements Initializable {
 	
 	private HuluWorld huluWorld;
 
-	ReplayPainter replayPainter;
 	String form;
 
 	public MainController() {
@@ -96,10 +95,6 @@ public class MainController implements Initializable {
 	@FXML
 	private void handleRestartGame() {
 		System.out.println("按下了重新开始");
-		if (replayPainter != null) {
-			replayPainter.kill();
-		}
-
 		startBattleBtn.setDisable(false);
 		replayGameBtn.setDisable(false);
 		restartGameBtn.setDisable(false);
@@ -149,9 +144,6 @@ public class MainController implements Initializable {
 	public void killAllThread() {
 		System.out.println("killAllThread");
 
-		if (replayPainter != null) {
-			replayPainter.kill();
-		}
 		huluWorld.killAllTheThread();
 	}
 	

@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 import loginfo.CreatureInfo;
 import loginfo.FrameInfo;
-import loginfo.SkillThingInfo;
 import thing.Thing;
 import thing.creature.CreatureState;
 import thing.creature.Good;
@@ -188,11 +187,6 @@ public class HuluWorld implements Runnable,Constants{
 			fout.write(creatureInfoNum+"\n");
 			for (CreatureInfo creatureInfo : frameInfos.get(i).creatureInfos) {
 				fout.write(creatureInfo.toString());
-			}
-			int skillThingInfoNum = frameInfos.get(i).skillThingInfos.size();
-			fout.write(skillThingInfoNum+"\n");
-			for (SkillThingInfo skillThingInfo : frameInfos.get(i).skillThingInfos) {
-				fout.write(skillThingInfo.toString());
 			}
 		}
 		fout.write(battleResult+"\n");

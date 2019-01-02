@@ -20,7 +20,7 @@ public class BattleEvent implements Runnable {
 	
 	@Override
 	public void run() {
-		System.out.println(cala.getName()+"和"+mons.getName()+"战斗线程开始");
+		//System.out.println(cala.getName()+"和"+mons.getName()+"战斗线程开始");
 		while (cala.getBlood() > 0 && mons.getBlood() > 0 && !cala.isKilled() && !mons.isKilled()) {
 			Random random = new Random();
 			int temp = random.nextInt(2);
@@ -47,7 +47,7 @@ public class BattleEvent implements Runnable {
 		} else {
 			mons.setState(CreatureState.RUNNING);
 		}
-		System.out.println(cala.getName()+"和"+mons.getName()+"战斗线程退出");
+		//System.out.println(cala.getName()+"和"+mons.getName()+"战斗线程退出");
 	}
 
 }
