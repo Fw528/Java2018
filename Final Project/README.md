@@ -3,6 +3,7 @@
     一切起源于Thing这个类，Creature继承它，然后被代表两个阵营的正义和邪恶继承。
     蝎子精和小喽啰没有单独子类，蛇精有（因为本来想做蛇精做成远程输出的，agiain,没有完成。
     7个葫芦娃共享葫芦娃类，爷爷单独有个class,因为最初想把爷爷做成没有攻击力的旁观者，即当葫芦娃死亡爷爷自动死亡，但是发现这样并咩有意义。
+![Image text](src/main/resources/readme/class.png)
     
 ### 界面说明
 ![Image text](src/main/resources/readme/阵型.gif)
